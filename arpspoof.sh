@@ -23,7 +23,8 @@ then
 	echo -ne "If you want to install, connect your pc with internet.Do you want to install it(Y/N):" && read ans
 	if [ $ans == "Y" ] || [ $ans == "y" ] 
 	then
-		dnf install dsniff &> /dev/null && echo "Installing..."
+		echo "Installing..."
+		sudo dnf install dsniff &> /dev/null || sudo apt-get install dsniff &> /dev/null 
 		continue
 	elif [ $ans == "N" ] || [ $ans == "n" ]
 	then
