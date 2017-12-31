@@ -7,7 +7,13 @@ exitprog(){
 	sleep 1
 	exit 0
 }
-
+exitfunc(){
+	echo "Installing has a problem."
+	echo "Check your internet connection..."
+	echo "Exiting..."
+	sleep 1
+	exit 0
+}
 trap exitprog SIGINT  
 if [ $UID -ne 0 ] 
 then
@@ -25,7 +31,7 @@ then
 	then
 		echo "Installing..."
 		sudo dnf install dsniff &> /dev/null || sudo apt-get install dsniff &> /dev/null 
-		continue
+		test $? -eq 0 && continue || exitfunc
 	elif [ $ans == "N" ] || [ $ans == "n" ]
 	then
 		echo "Thanks.."
